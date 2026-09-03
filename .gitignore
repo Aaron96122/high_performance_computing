@@ -1,0 +1,7 @@
+# Compiled C files
+*.o
+*.out
+allocation/execute
+control_flow/control-flow
+first/function_calls
+memory/sizeof
