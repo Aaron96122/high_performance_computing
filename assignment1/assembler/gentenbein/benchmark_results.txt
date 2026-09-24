@@ -1,0 +1,24 @@
+====program_O0====
+The result is 499999999500000000
+benchmark time for one iteration: 2379854.600000
+
+====program_O1====
+The result is 499999999500000000
+benchmark time for one iteration: 293199.400000
+
+====program_O2====
+The result is 499999999500000000
+benchmark time for one iteration: 15.400000
+
+====program_O3====
+The result is 499999999500000000
+benchmark time for one iteration: 14.200000
+
+====program_Os====
+The result is 499999999500000000
+benchmark time for one iteration: 15.800000
+
+====program_Og====
+The result is 499999999500000000
+benchmark time for one iteration: 553455.000000
+

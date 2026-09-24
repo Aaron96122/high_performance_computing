@@ -1,0 +1,12 @@
+====same/same_file====
+Benchmark time for each loop is: 22.0mus
+The random element of as is: -40324.000000+722682247.000000i
+
+====different/different_file====
+Benchmark time for each loop is 49.021080mus
+The random element of as is: -22429.000000+223584732.000000i
+
+====inline/inlined_manually====
+Benchmark time for inlined loop is 22.753930mus
+The random element of as is: -76639.000000+2610469102.000000i
+
