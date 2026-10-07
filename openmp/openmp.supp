@@ -1,0 +1,96 @@
+# Valgrind suppression file for GCC OpenMP (libgomp)
+#
+# The libgomp runtime spins up a persistent thread pool the first time a
+# parallel region is entered and never tears it down before exit. Memory for
+# the pool, per-thread stacks and the thread descriptors is therefore reported
+# by Memcheck as "still reachable" / "possibly lost", and Helgrind/DRD flag the
+# pool's internal synchronization as data races / lock-order issues. None of
+# these come from the application code, so they are suppressed here.
+#
+# Usage:
+#   valgrind --leak-check=full --suppressions=openmp.supp ./distances ...
+#
+# To generate additional suppressions for leaks not yet covered, run with
+#   valgrind --leak-check=full --gen-suppressions=all ./distances ...
+# and paste the printed blocks into this file.
+
+# ---------------------------------------------------------------------------
+# Memcheck: allocations owned by the libgomp thread pool
+# ---------------------------------------------------------------------------
+{
+   libgomp-thread-pool-alloc
+   Memcheck:Leak
+   fun:malloc
+   ...
+   obj:*/libgomp.so*
+}
+
+{
+   libgomp-thread-pool-calloc
+   Memcheck:Leak
+   fun:calloc
+   ...
+   obj:*/libgomp.so*
+}
+
+{
+   libgomp-thread-pool-realloc
+   Memcheck:Leak
+   fun:realloc
+   ...
+   obj:*/libgomp.so*
+}
+
+{
+   libgomp-gomp-team-start
+   Memcheck:Leak
+   ...
+   fun:gomp_team_start
+}
+
+{
+   libgomp-via-gomp-parallel
+   Memcheck:Leak
+   ...
+   fun:GOMP_parallel
+}
+
+# ---------------------------------------------------------------------------
+# Memcheck: pthread stacks / TLS created for the OpenMP worker threads
+# ---------------------------------------------------------------------------
+{
+   libgomp-pthread-create-stack
+   Memcheck:Leak
+   fun:calloc
+   ...
+   fun:allocate_stack
+   fun:pthread_create*
+   ...
+   obj:*/libgomp.so*
+}
+
+{
+   libgomp-pthread-create
+   Memcheck:Leak
+   ...
+   fun:pthread_create*
+   ...
+   obj:*/libgomp.so*
+}
+
+# ---------------------------------------------------------------------------
+# Helgrind / DRD: false positives from the pool's internal synchronization
+# ---------------------------------------------------------------------------
+{
+   libgomp-helgrind-race
+   Helgrind:Race
+   ...
+   obj:*/libgomp.so*
+}
+
+{
+   libgomp-drd-conflict
+   drd:ConflictingAccess
+   ...
+   obj:*/libgomp.so*
+}
