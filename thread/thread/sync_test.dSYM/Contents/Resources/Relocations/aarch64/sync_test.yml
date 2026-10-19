@@ -1,0 +1,9 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     sync_test
+relocations:
+  - { offset: 0x19, size: 0x8, addend: 0x0, symName: _main_thrd, symObjAddr: 0x0, symBinAddr: 0x100000560, symSize: 0x1B4 }
+  - { offset: 0x363, size: 0x8, addend: 0x0, symName: _main, symObjAddr: 0x354, symBinAddr: 0x1000008B4, symSize: 0x7C0 }
+  - { offset: 0x5DD, size: 0x8, addend: 0x0, symName: _main_thrd_check, symObjAddr: 0x1B4, symBinAddr: 0x100000714, symSize: 0x1A0 }
+  - { offset: 0x6DC, size: 0x8, addend: 0x0, symName: _main_thrd, symObjAddr: 0x0, symBinAddr: 0x100000560, symSize: 0x1B4 }
+...
